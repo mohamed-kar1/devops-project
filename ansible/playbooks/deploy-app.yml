@@ -1,0 +1,24 @@
+---
+- name: Déployer l'application sur Kubernetes
+  hosts: masters
+  become: false
+
+  tasks:
+    - name: Copier les manifests Kubernetes
+      copy:
+        src: ../../k8s/
+        dest: /home/ubuntu/k8s/
+
+    - name: Appliquer le déploiement
+      shell: kubectl apply -f /home/ubuntu/k8s/
+      register: deploy_result
+
+    - name: Attendre que les pods soient prêts
+      shell: kubectl rollout status deployment/devops-api -n default --timeout=120s
+
+    - name: Afficher l'état des pods
+      shell: kubectl get pods -n default
+      register: pods_status
+
+    - debug:
+        msg: "{{ pods_status.stdout }}"
