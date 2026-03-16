@@ -8,7 +8,7 @@ def home():
     return jsonify({
         "message": "Bienvenue sur l'API DevOps",
         "status": "running",
-        "version": "1.0.0",
+        "version": "1.0.1",
         "env": os.getenv("ENV", "production")
     })
 
