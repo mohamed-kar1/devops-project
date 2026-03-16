@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: devops-api
-          image: votre-dockerhub-username/devops-api:latest
+          image: med25amine/devops-api:latest
           ports:
             - containerPort: 8080  # Port 8080 (5000 et 3000 déjà utilisés)
           env:
